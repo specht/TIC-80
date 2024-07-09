@@ -90,7 +90,7 @@ static void setDefault(Config* config)
         .options = 
         {
 #if defined(CRT_SHADER_SUPPORT)
-            .crt            = false,
+            .crt            = true,
 #endif
             .volume         = MAX_VOLUME,
             .vsync          = DEFAULT_VSYNC,
