@@ -1232,7 +1232,7 @@ static void onNewCommandConfirmed(Console* console)
             {
                 loadDemo(console, ln);
                 done = true;
-            }            
+            }
         }
 
         if(!done)
@@ -1610,6 +1610,7 @@ static void onMakeDirectory(Console* console)
         }
 
         sprintf(msg, "\ncreated [%s] folder :)", param);
+        EM_ASM_({ Module.storeFiles(); });
 
         printBack(console, tic_fs_makedir(console->fs, param)
             ? "\nerror, dir not created :("
@@ -1692,6 +1693,7 @@ static void onInstallDemosCommand(Console* console)
         }
 
         tic_fs_dirback(fs);
+        EM_ASM_({ Module.storeFiles(); });
     }
 
     commandDone(console);
@@ -2597,6 +2599,8 @@ static CartSaveResult saveCartName(Console* console, const char* name)
                     setCartName(console, name, tic_fs_path(console->fs, name));
                     success = true;
                     studioRomSaved(console->studio);
+
+                    EM_ASM_({ Module.storeFiles(); });
                 }
             }
 
@@ -2733,6 +2737,7 @@ static void onDelCommandConfirmed(Console* console)
                     ? "\nfile not deleted"
                     : "\nfile successfully deleted");
             }
+            EM_ASM_({ Module.storeFiles(); });
         }
     }
     else printBack(console, "\nname is missing");
