@@ -2809,6 +2809,8 @@ static void onAddCommand(Console* console)
 
                 _free(filePtr);
                 _free(dataPtr);
+
+                Module.storeFiles();
             }
         });
     }, onAddFile, console);
