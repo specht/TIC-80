@@ -1522,9 +1522,11 @@ static void onDirDone(void* ctx)
 
         if(item->dir)
         {
-            printBack(console, "[");
-            printBack(console, item->name);
-            printBack(console, "]");
+            if (strcmp(item->name, TIC_HOST) != 0) {
+                printBack(console, "[");
+                printBack(console, item->name);
+                printBack(console, "]");
+            }
         }
         else printFront(console, item->name);
 
@@ -1533,9 +1535,9 @@ static void onDirDone(void* ctx)
 
     if (data->count == 0)
     {
-        printBack(console, "\n\nuse ");
-        printFront(console, "DEMO");
-        printBack(console, " command to install demo carts");
+        // printBack(console, "\n\nuse ");
+        // printFront(console, "DEMO");
+        // printBack(console, " command to install demo carts");
     }
     else free(data->items);
 
@@ -1610,7 +1612,7 @@ static void onMakeDirectory(Console* console)
         }
 
         sprintf(msg, "\ncreated [%s] folder :)", param);
-        EM_ASM_({ Module.storeFiles(); });
+        // EM_ASM_({ Module.storeFiles(); });
 
         printBack(console, tic_fs_makedir(console->fs, param)
             ? "\nerror, dir not created :("
@@ -1693,7 +1695,7 @@ static void onInstallDemosCommand(Console* console)
         }
 
         tic_fs_dirback(fs);
-        EM_ASM_({ Module.storeFiles(); });
+        // EM_ASM_({ Module.storeFiles(); });
     }
 
     commandDone(console);
@@ -2600,7 +2602,7 @@ static CartSaveResult saveCartName(Console* console, const char* name)
                     success = true;
                     studioRomSaved(console->studio);
 
-                    EM_ASM_({ Module.storeFiles(); });
+                    // EM_ASM_({ Module.storeFiles(); });
                 }
             }
 
@@ -2737,7 +2739,7 @@ static void onDelCommandConfirmed(Console* console)
                     ? "\nfile not deleted"
                     : "\nfile successfully deleted");
             }
-            EM_ASM_({ Module.storeFiles(); });
+            // EM_ASM_({ Module.storeFiles(); });
         }
     }
     else printBack(console, "\nname is missing");
@@ -2810,7 +2812,7 @@ static void onAddCommand(Console* console)
                 _free(filePtr);
                 _free(dataPtr);
 
-                Module.storeFiles();
+                // Module.storeFiles();
             }
         });
     }, onAddFile, console);

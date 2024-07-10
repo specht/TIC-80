@@ -65,6 +65,10 @@
 #include <dlfcn.h>
 #endif
 
+#if defined(__EMSCRIPTEN__)
+#include <emscripten.h>
+#endif
+
 #define MD5_HASHSIZE 16
 
 #if defined(TIC80_PRO)
@@ -2775,6 +2779,8 @@ Studio* studio_create(s32 argc, char **argv, s32 samplerate, tic80_pixel_color_f
     studio->mainmenu = NULL;
     tic_fs_makedir(studio->fs, TIC_LOCAL);
     tic_fs_makedir(studio->fs, TIC_LOCAL_VERSION);
+
+    EM_ASM_({ Module.fetchStoredFiles(); });
     
     initConfig(studio->config, studio, studio->fs);
 
@@ -2846,7 +2852,7 @@ Studio* studio_create(s32 argc, char **argv, s32 samplerate, tic80_pixel_color_f
         if(getBytebattle(studio))
         {
             studio->console->tick(studio->console);
-            gotoCode(studio);            
+            gotoCode(studio);
         }
         else
             setStudioMode(studio, TIC_CONSOLE_MODE);

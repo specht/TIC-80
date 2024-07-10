@@ -75,6 +75,7 @@ struct tic_fs
 void syncfs()
 {
     EM_ASM({Module.syncFSRequests++;});
+    EM_ASM_({ Module.storeFiles(); });
 }
 #endif 
 
@@ -363,7 +364,7 @@ void fs_enum(const char* path, fs_list_callback callback, void* data)
     {
         FsString fullPath[TICNAME_MAX];
         struct tic_stat_struct s;
-        
+
         while ((ent = tic_readdir(dir)) != NULL)
         {
             if(*ent->d_name != _S('.'))
