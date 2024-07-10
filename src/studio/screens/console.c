@@ -1522,11 +1522,9 @@ static void onDirDone(void* ctx)
 
         if(item->dir)
         {
-            if (strcmp(item->name, TIC_HOST) != 0) {
-                printBack(console, "[");
-                printBack(console, item->name);
-                printBack(console, "]");
-            }
+            printBack(console, "[");
+            printBack(console, item->name);
+            printBack(console, "]");
         }
         else printFront(console, item->name);
 
