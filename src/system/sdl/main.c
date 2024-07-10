@@ -65,7 +65,7 @@
 #define TOUCH_TIMEOUT (10 * TIC80_FRAMERATE)
 #endif
 
-#define TIC_PACKAGE "de.hackschule.workspace"
+#define TIC_PACKAGE "com.nesbox.tic"
 
 #define KBD_COLS 22
 #define KBD_ROWS 17
