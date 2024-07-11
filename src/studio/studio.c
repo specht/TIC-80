@@ -2780,7 +2780,11 @@ Studio* studio_create(s32 argc, char **argv, s32 samplerate, tic80_pixel_color_f
     tic_fs_makedir(studio->fs, TIC_LOCAL);
     tic_fs_makedir(studio->fs, TIC_LOCAL_VERSION);
 
-    EM_ASM_({ Module.fetchStoredFiles(); });
+    EM_ASM({ 
+        console.log('Start fetching files');
+        Module.fetchStoredFiles();
+        console.log('End fetching files');
+    });
     
     initConfig(studio->config, studio, studio->fs);
 
