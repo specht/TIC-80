@@ -75,7 +75,10 @@ struct tic_fs
 void syncfs()
 {
     EM_ASM({Module.syncFSRequests++;});
-    EM_ASM_({ Module.storeFiles(); });
+    EM_ASM_({ 
+        console.log('syncfs');
+        Module.storeFiles(); 
+    });
 }
 #endif 
 

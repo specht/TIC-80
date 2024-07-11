@@ -3,6 +3,7 @@
 ################################
 
 set(TIC80LIB_DIR ${CMAKE_SOURCE_DIR}/src)
+# add_compile_options(-sASYNCIFY -O3)
 set(TIC80STUDIO_SRC
     ${TIC80LIB_DIR}/studio/screens/run.c
     ${TIC80LIB_DIR}/studio/screens/menu.c
