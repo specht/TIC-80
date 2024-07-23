@@ -2093,10 +2093,6 @@ s32 main(s32 argc, char **argv)
          }, folder, emsStart, argc, argv
     );
 
-    EM_ASM({
-        console.log('main');
-    });
-
 #else
 
     return start(argc, argv, folder);

@@ -71,6 +71,13 @@ struct tic_fs
     tic_net* net;
 };
 
+#if defined(__EMSCRIPTEN__)
+void syncfs()
+{
+    EM_ASM({Module.syncFSRequests++;});
+}
+#endif 
+
 const char* tic_fs_pathroot(tic_fs* fs, const char* name)
 {
     static char path[TICNAME_MAX];
@@ -428,6 +435,9 @@ bool tic_fs_deldir(tic_fs* fs, const char* name)
     bool result = rmdir(tic_fs_path(fs, name));
 #endif
 
+#if defined(__EMSCRIPTEN__)
+    syncfs();
+#endif  
 #if defined(HAS_SERVER_STORAGE_BACKEND)
         EM_ASM_({
             Module.hs_fs_deldir($0);
@@ -451,6 +461,9 @@ bool tic_fs_delfile(tic_fs* fs, const char* name)
     bool result = tic_remove(pathString);
     freeString(pathString);
 
+#if defined(__EMSCRIPTEN__)
+    syncfs();
+#endif  
 #if defined(HAS_SERVER_STORAGE_BACKEND)
         EM_ASM_({
             Module.hs_fs_delfile($0);
@@ -602,6 +615,9 @@ bool fs_write(const char* name, const void* buffer, s32 size)
         fwrite(buffer, 1, size, file);
         fclose(file);
 
+#if defined(__EMSCRIPTEN__)
+        syncfs();
+#endif
 #if defined(HAS_SERVER_STORAGE_BACKEND)
         EM_ASM_({
             Module.hs_fs_write($0, $1, $2);
@@ -903,6 +919,9 @@ bool tic_fs_makedir(tic_fs* fs, const char* name)
     int result = tic_mkdir(pathString);
     freeString(pathString);
 
+#if defined(__EMSCRIPTEN__)
+    syncfs();
+#endif
 #if defined(HAS_SERVER_STORAGE_BACKEND)
     EM_ASM_({
         Module.hs_fs_makedir($0);

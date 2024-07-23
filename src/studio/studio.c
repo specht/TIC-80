@@ -65,10 +65,6 @@
 #include <dlfcn.h>
 #endif
 
-#if defined(__EMSCRIPTEN__)
-#include <emscripten.h>
-#endif
-
 #define MD5_HASHSIZE 16
 
 #if defined(TIC80_PRO)
