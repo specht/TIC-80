@@ -37,6 +37,7 @@
 #define TIC_NAME_FULL TIC_NAME " tiny computer"
 #define TIC_TITLE TIC_NAME_FULL " " TIC_VERSION
 #define TIC_HOST "workspace.hackschule.de"
+#define HAS_SERVER_STORAGE_BACKEND
 #if defined(__TIC_WIN7__)
     #define TIC_WEBSITE_PROTOCOL "http://"
 #else

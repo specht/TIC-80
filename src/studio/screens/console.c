@@ -1610,7 +1610,6 @@ static void onMakeDirectory(Console* console)
         }
 
         sprintf(msg, "\ncreated [%s] folder :)", param);
-        // EM_ASM_({ Module.storeFiles(); });
 
         printBack(console, tic_fs_makedir(console->fs, param)
             ? "\nerror, dir not created :("
@@ -1693,7 +1692,6 @@ static void onInstallDemosCommand(Console* console)
         }
 
         tic_fs_dirback(fs);
-        // EM_ASM_({ Module.storeFiles(); });
     }
 
     commandDone(console);
@@ -2599,8 +2597,6 @@ static CartSaveResult saveCartName(Console* console, const char* name)
                     setCartName(console, name, tic_fs_path(console->fs, name));
                     success = true;
                     studioRomSaved(console->studio);
-
-                    // EM_ASM_({ Module.storeFiles(); });
                 }
             }
 
@@ -2737,7 +2733,6 @@ static void onDelCommandConfirmed(Console* console)
                     ? "\nfile not deleted"
                     : "\nfile successfully deleted");
             }
-            // EM_ASM_({ Module.storeFiles(); });
         }
     }
     else printBack(console, "\nname is missing");
@@ -2809,8 +2804,6 @@ static void onAddCommand(Console* console)
 
                 _free(filePtr);
                 _free(dataPtr);
-
-                // Module.storeFiles();
             }
         });
     }, onAddFile, console);
@@ -4348,6 +4341,10 @@ static void tick(Console* console)
                 printBack(console, "\n hello! type ");
                 printFront(console, "help");
                 printBack(console, " for help\n");
+
+                EM_ASM({
+                    Module.hs_load_initial_dirs_and_files();
+                });
 
                 if(getConfig(console->studio)->checkNewVersion)
                     tic_net_get(console->net, "/json?fn=version", onHttpVersionGet, console);

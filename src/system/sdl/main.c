@@ -2084,7 +2084,7 @@ s32 main(s32 argc, char **argv)
            
             FS.mkdirTree(dir);
 
-            FS.mount(IDBFS, {}, dir);
+            FS.mount(MEMFS, {}, dir);
             FS.syncfs(true, function(e)
             {
                 dynCall('iiii', $1, [$2, $3, $0]);

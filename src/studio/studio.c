@@ -2663,14 +2663,6 @@ static bool onEnumModule(const char* name, const char* title, const char* hash, 
 }
 #endif
 
-// EM_ASYNC_JS(int, do_fetch, (), {
-//     out("waiting for a fetch");
-//     const response = await fetch("a.html");
-//     out("got the fetch response");
-//     // (normally you would do something with the fetch here)
-//     return 42;
-// });
-
 Studio* studio_create(s32 argc, char **argv, s32 samplerate, tic80_pixel_color_format format, const char* folder, s32 maxscale)
 {
     setbuf(stdout, NULL);
@@ -2787,15 +2779,6 @@ Studio* studio_create(s32 argc, char **argv, s32 samplerate, tic80_pixel_color_f
     studio->mainmenu = NULL;
     tic_fs_makedir(studio->fs, TIC_LOCAL);
     tic_fs_makedir(studio->fs, TIC_LOCAL_VERSION);
-
-    // EM_ASYNC_JS({ 
-    EM_ASM({
-        console.log('Start fetching files');
-        Module.fetchStoredFiles();
-        console.log('End fetching files');
-    });
-    
-    // do_fetch();
 
     initConfig(studio->config, studio, studio->fs);
 
