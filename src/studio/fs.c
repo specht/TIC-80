@@ -440,8 +440,8 @@ bool tic_fs_deldir(tic_fs* fs, const char* name)
 #endif  
 #if defined(HAS_SERVER_STORAGE_BACKEND)
         EM_ASM_({
-            Module.hs_fs_deldir($0);
-        }, name);
+            Module.hs_fs_deldir($0, $1);
+        }, name, fs->work);
 #endif
 
     return result;
@@ -466,8 +466,8 @@ bool tic_fs_delfile(tic_fs* fs, const char* name)
 #endif  
 #if defined(HAS_SERVER_STORAGE_BACKEND)
         EM_ASM_({
-            Module.hs_fs_delfile($0);
-        }, name);
+            Module.hs_fs_delfile($0, $1);
+        }, name, fs->work);
 #endif
 
     return result;
@@ -620,7 +620,7 @@ bool fs_write(const char* name, const void* buffer, s32 size)
 #endif
 #if defined(HAS_SERVER_STORAGE_BACKEND)
         EM_ASM_({
-            Module.hs_fs_write($0, $1, $2);
+            Module.hs_fs_write($0, $1, $2, $3);
         }, name, buffer, size);
 #endif
 
@@ -924,8 +924,8 @@ bool tic_fs_makedir(tic_fs* fs, const char* name)
 #endif
 #if defined(HAS_SERVER_STORAGE_BACKEND)
     EM_ASM_({
-        Module.hs_fs_makedir($0);
-    }, name);
+        Module.hs_fs_makedir($0, $1);
+    }, name, fs->work);
 #endif
 
     return result;
