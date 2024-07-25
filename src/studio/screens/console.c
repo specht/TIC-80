@@ -4137,6 +4137,12 @@ static void tick(Console* console)
                 if(getConfig(console->studio)->checkNewVersion)
                     tic_net_get(console->net, "/api?fn=version", onHttpVersionGet, console);
 #endif
+
+#if defined(HAS_SERVER_STORAGE_BACKEND)
+                EM_ASM({
+                    Module.hs_load_initial_dirs_and_files();
+                });
+#endif
             }
 
             commandDone(console);

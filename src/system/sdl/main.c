@@ -1497,12 +1497,12 @@ static void loadCrtShader()
         "// Hardness of scanline."                                                          "\n"
         "//  -8.0 = soft"                                                                   "\n"
         "// -16.0 = medium"                                                                 "\n"
-        "float hardScan=-8.0;"                                                              "\n"
+        "float hardScan=-12.0;"                                                              "\n"
         ""                                                                                  "\n"
         "// Hardness of pixels in scanline."                                                "\n"
         "// -2.0 = soft"                                                                    "\n"
         "// -4.0 = hard"                                                                    "\n"
-        "float hardPix=-3.0;"                                                               "\n"
+        "float hardPix=-4.0;"                                                               "\n"
         ""                                                                                  "\n"
         "// Display warp."                                                                  "\n"
         "// 0.0 = none"                                                                     "\n"
@@ -1601,7 +1601,7 @@ static void loadCrtShader()
         "    return mask;}    "                                                             "\n"
         ""                                                                                  "\n"
         "void main() {"                                                                     "\n"
-        "    hardScan=-12.0;"                                                               "\n"
+        "    //hardScan=-12.0;"                                                               "\n"
         "    //maskDark=maskLight;"                                                         "\n"
         "    vec2 start=gl_FragCoord.xy-vec2(trg_x, trg_y);"                                "\n"
         "    start.y=trg_h-start.y;"                                                        "\n"
@@ -2048,7 +2048,7 @@ s32 main(s32 argc, char **argv)
            
             FS.mkdirTree(dir);
 
-            FS.mount(IDBFS, {}, dir);
+            FS.mount(MEMFS, {}, dir);
             FS.syncfs(true, function(e)
             {
                 dynCall('iiii', $1, [$2, $3, $0]);

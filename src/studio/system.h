@@ -36,9 +36,10 @@
 #define TIC_NAME "TIC-80"
 #define TIC_NAME_FULL TIC_NAME " tiny computer"
 #define TIC_TITLE TIC_NAME_FULL " " TIC_VERSION
-#define TIC_HOST "tic80.com"
+#define TIC_HOST "workspace.hackschule.de"
 #define TIC_WEBSITE "https://" TIC_HOST
 #define TIC_COPYRIGHT TIC_WEBSITE " (C) 2017-" TIC_VERSION_YEAR
+#define HAS_SERVER_STORAGE_BACKEND
 
 #define TICNAME_MAX 256
 
