@@ -19,9 +19,10 @@ struct CachedNames{
 
 // duplicate a pkpy_CString to a null-terminated c string
 static char* cstrdup(pkpy_CString cs){
-    char* s = (char*)malloc(cs.size + 1);
-    memcpy(s, cs.data, cs.size);
-    s[cs.size] = '\0';
+    size_t l = strlen(cs);
+    char* s = (char*)malloc(l + 1);
+    memcpy(s, cs, l);
+    s[l] = '\0';
     return s;
 }
 
@@ -902,7 +903,7 @@ static int py_sfx(pkpy_vm* vm)
         parse_note = true;
         pkpy_CString tmp;
         pkpy_to_string(vm, 1, &tmp);
-        if(tmp.size) string_note = cstrdup(tmp);
+        if(strlen(tmp)) string_note = cstrdup(tmp);
     } else {
         pkpy_to_int(vm, 1, &int_note);
     }
